@@ -1,0 +1,18 @@
+{
+  "id": "level_003",
+  "name": "Frozen Edge",
+  "width": 8,
+  "height": 6,
+  "move_limit": 16,
+  "available_powers": ["Sun", "Frost", "Wind"],
+  "win_conditions": ["RemoveAllFire"],
+  "lose_conditions": ["OutOfMoves"],
+  "tiles": [
+    ["Ice", "Ice", "Empty", "Empty", "Empty", "Empty", "Ice", "Ice"],
+    ["Ice", "CropDry", "Empty", "Fire", "Fire", "Empty", "CropDry", "Ice"],
+    ["Empty", "Empty", "Rock", "Empty", "Empty", "Rock", "Empty", "Empty"],
+    ["Empty", "Water", "Empty", "CropGrowing", "CropGrowing", "Empty", "Water", "Empty"],
+    ["Ice", "CropHarvested", "Empty", "Empty", "Empty", "Empty", "CropHarvested", "Ice"],
+    ["Ice", "Ice", "Empty", "Empty", "Empty", "Empty", "Ice", "Ice"]
+  ]
+}

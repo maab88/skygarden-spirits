@@ -1,0 +1,18 @@
+{
+  "id": "level_001",
+  "name": "First Sprouts",
+  "width": 8,
+  "height": 6,
+  "move_limit": 12,
+  "available_powers": ["Rain", "Sun"],
+  "win_conditions": ["HarvestAllCrops"],
+  "lose_conditions": ["OutOfMoves"],
+  "tiles": [
+	["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"],
+	["Empty", "CropDry", "CropGrowing", "CropHarvested", "Empty", "Empty", "Empty", "Empty"],
+	["Empty", "Empty", "Empty", "Empty", "Fire", "Water", "Empty", "Empty"],
+	["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Rock", "Empty"],
+	["Empty", "Empty", "Ice", "Empty", "Empty", "Empty", "Empty", "Empty"],
+	["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+  ]
+}
