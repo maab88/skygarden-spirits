@@ -4,6 +4,7 @@ extends Node2D
 @onready var restart_button: Button = $RestartButton
 @onready var rain_button: Button = $RainButton
 @onready var sun_button: Button = $SunButton
+@onready var frost_button: Button = $FrostButton
 @onready var level_name_label: Label = $LevelNameLabel
 @onready var moves_label: Label = $MovesLabel
 @onready var selected_power_label: Label = $SelectedPowerLabel
@@ -13,6 +14,7 @@ const DEFAULT_LEVEL_PATH := "res://data/levels/level_001.json"
 const POWER_NONE := ""
 const POWER_RAIN := "Rain"
 const POWER_SUN := "Sun"
+const POWER_FROST := "Frost"
 
 var board_state: BoardState
 var current_level_data: LevelData
@@ -24,6 +26,7 @@ func _ready() -> void:
 	restart_button.pressed.connect(_on_restart_button_pressed)
 	rain_button.pressed.connect(_on_rain_button_pressed)
 	sun_button.pressed.connect(_on_sun_button_pressed)
+	frost_button.pressed.connect(_on_frost_button_pressed)
 	board_renderer.cell_clicked.connect(_on_board_cell_clicked)
 	_load_level_and_build_board()
 
@@ -41,6 +44,10 @@ func _on_sun_button_pressed() -> void:
 	selected_power = POWER_SUN
 	update_hud()
 
+func _on_frost_button_pressed() -> void:
+	selected_power = POWER_FROST
+	update_hud()
+
 func _on_board_cell_clicked(cell_pos: Vector2i) -> void:
 	if selected_power == POWER_NONE:
 		push_warning("Select a power first.")
@@ -51,6 +58,8 @@ func _on_board_cell_clicked(cell_pos: Vector2i) -> void:
 		changed = apply_rain_to_cell(cell_pos)
 	elif selected_power == POWER_SUN:
 		changed = apply_sun_to_cell(cell_pos)
+	elif selected_power == POWER_FROST:
+		changed = apply_frost_to_cell(cell_pos)
 
 	if not changed:
 		push_warning("%s had no effect, move not consumed." % selected_power)
@@ -124,6 +133,21 @@ func apply_sun_to_cell(target_pos: Vector2i) -> bool:
 
 	board_state.set_cell(target_pos, TileState.CROP_HARVESTED)
 	return true
+
+func apply_frost_to_cell(target_pos: Vector2i) -> bool:
+	if moves_remaining <= 0:
+		return false
+
+	var target_tile := board_state.get_cell(target_pos)
+	if target_tile == TileState.WATER:
+		board_state.set_cell(target_pos, TileState.ICE)
+		return true
+
+	if target_tile == TileState.FIRE:
+		board_state.set_cell(target_pos, TileState.EMPTY)
+		return true
+
+	return false
 
 func consume_move() -> void:
 	moves_remaining = max(0, moves_remaining - 1)
