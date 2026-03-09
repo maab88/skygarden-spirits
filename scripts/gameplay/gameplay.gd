@@ -45,7 +45,7 @@ func _ready() -> void:
 	_load_level_and_build_board()
 
 func _on_finish_button_pressed() -> void:
-	ResultState.set_result(true, "Win", "Finished from temporary Finish button.")
+	ResultState.set_result(true, "Win", "Finished from temporary Finish button.", _current_level_id())
 	get_tree().change_scene_to_file("res://scenes/ui/results.tscn")
 
 func _on_restart_button_pressed() -> void:
@@ -218,12 +218,12 @@ func evaluate_end_of_level() -> void:
 
 	var win_conditions_met := are_win_conditions_met()
 	if win_conditions_met:
-		ResultState.set_result(true, "Win", _build_win_reason())
+		ResultState.set_result(true, "Win", _build_win_reason(), _current_level_id())
 		get_tree().change_scene_to_file("res://scenes/ui/results.tscn")
 		return
 
 	if moves_remaining == 0 and _has_lose_condition("OutOfMoves"):
-		ResultState.set_result(false, "Lose", "Out of moves before finishing all goals.")
+		ResultState.set_result(false, "Lose", "Out of moves before finishing all goals.", _current_level_id())
 		get_tree().change_scene_to_file("res://scenes/ui/results.tscn")
 
 func are_win_conditions_met() -> bool:
@@ -283,6 +283,11 @@ func _win_condition_to_text(condition_name: String) -> String:
 			return "Remove all fire"
 		_:
 			return condition_name
+
+func _current_level_id() -> String:
+	if current_level_data == null:
+		return ""
+	return current_level_data.id
 
 func update_hud() -> void:
 	if current_level_data == null:
