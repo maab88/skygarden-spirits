@@ -1,8 +1,13 @@
 extends Control
+const ResultState = preload("res://scripts/data/result_state.gd")
 
+@onready var title_label: Label = $TitleLabel
+@onready var reason_label: Label = $ReasonLabel
 @onready var back_to_menu_button: Button = $BackToMenuButton
 
 func _ready() -> void:
+	title_label.text = ResultState.title
+	reason_label.text = ResultState.reason
 	back_to_menu_button.pressed.connect(_on_back_to_menu_button_pressed)
 
 func _on_back_to_menu_button_pressed() -> void:

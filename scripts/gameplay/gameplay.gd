@@ -1,4 +1,5 @@
 extends Node2D
+const ResultState = preload("res://scripts/data/result_state.gd")
 
 @onready var finish_button: Button = $FinishButton
 @onready var restart_button: Button = $RestartButton
@@ -44,6 +45,7 @@ func _ready() -> void:
 	_load_level_and_build_board()
 
 func _on_finish_button_pressed() -> void:
+	ResultState.set_result(true, "Win", "Finished from temporary Finish button.")
 	get_tree().change_scene_to_file("res://scenes/ui/results.tscn")
 
 func _on_restart_button_pressed() -> void:
@@ -102,6 +104,7 @@ func _on_board_cell_clicked(cell_pos: Vector2i) -> void:
 
 	consume_move()
 	board_renderer.refresh()
+	evaluate_end_of_level()
 
 func _load_level_and_build_board() -> void:
 	var level_path := LevelSelection.selected_level_path
@@ -208,6 +211,78 @@ func apply_wind_to_cell(target_pos: Vector2i) -> bool:
 func consume_move() -> void:
 	moves_remaining = max(0, moves_remaining - 1)
 	update_hud()
+
+func evaluate_end_of_level() -> void:
+	if current_level_data == null:
+		return
+
+	var win_conditions_met := are_win_conditions_met()
+	if win_conditions_met:
+		ResultState.set_result(true, "Win", _build_win_reason())
+		get_tree().change_scene_to_file("res://scenes/ui/results.tscn")
+		return
+
+	if moves_remaining == 0 and _has_lose_condition("OutOfMoves"):
+		ResultState.set_result(false, "Lose", "Out of moves before finishing all goals.")
+		get_tree().change_scene_to_file("res://scenes/ui/results.tscn")
+
+func are_win_conditions_met() -> bool:
+	if current_level_data == null:
+		return false
+
+	for condition in current_level_data.win_conditions:
+		match condition:
+			"HarvestAllCrops":
+				if has_unharvested_crops():
+					return false
+			"RemoveAllFire":
+				if has_any_fire():
+					return false
+			_:
+				push_warning("Unknown win condition: %s" % condition)
+				return false
+
+	return true
+
+func has_unharvested_crops() -> bool:
+	for y in range(board_state.height):
+		for x in range(board_state.width):
+			var tile := board_state.get_cell(Vector2i(x, y))
+			if tile == TileState.CROP_DRY or tile == TileState.CROP_GROWING:
+				return true
+	return false
+
+func has_any_fire() -> bool:
+	for y in range(board_state.height):
+		for x in range(board_state.width):
+			if board_state.get_cell(Vector2i(x, y)) == TileState.FIRE:
+				return true
+	return false
+
+func _has_lose_condition(condition_name: String) -> bool:
+	if current_level_data == null:
+		return false
+	return current_level_data.lose_conditions.has(condition_name)
+
+func _build_win_reason() -> String:
+	if current_level_data == null or current_level_data.win_conditions.is_empty():
+		return "All goals complete."
+
+	var goals_text := ""
+	for i in range(current_level_data.win_conditions.size()):
+		if i > 0:
+			goals_text += ", "
+		goals_text += _win_condition_to_text(current_level_data.win_conditions[i])
+	return "Completed goals: %s" % goals_text
+
+func _win_condition_to_text(condition_name: String) -> String:
+	match condition_name:
+		"HarvestAllCrops":
+			return "Harvest all crops"
+		"RemoveAllFire":
+			return "Remove all fire"
+		_:
+			return condition_name
 
 func update_hud() -> void:
 	if current_level_data == null:
