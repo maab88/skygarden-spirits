@@ -1,0 +1,14 @@
+# Godot 4+
+.import/
+.godot/
+
+# Mono/C#
+.mono/
+data_*/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json

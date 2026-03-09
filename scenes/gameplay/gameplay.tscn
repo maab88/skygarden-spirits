@@ -1,0 +1,17 @@
+[gd_scene format=3]
+
+[node name="Gameplay" type="Node2D"]
+
+[node name="GameplayLabel" type="Label" parent="."]
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 260.0
+offset_bottom = 63.0
+text = "Gameplay Placeholder"
+
+[node name="FinishButton" type="Button" parent="."]
+offset_left = 40.0
+offset_top = 90.0
+offset_right = 180.0
+offset_bottom = 121.0
+text = "Finish"
