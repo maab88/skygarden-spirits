@@ -2,21 +2,26 @@ extends Node2D
 
 @onready var finish_button: Button = $FinishButton
 @onready var restart_button: Button = $RestartButton
-@onready var test_action_button: Button = $TestActionButton
+@onready var rain_button: Button = $RainButton
 @onready var level_name_label: Label = $LevelNameLabel
 @onready var moves_label: Label = $MovesLabel
+@onready var selected_power_label: Label = $SelectedPowerLabel
 @onready var board_renderer: BoardRenderer = $BoardRenderer
 
 const DEFAULT_LEVEL_PATH := "res://data/levels/level_001.json"
+const POWER_NONE := ""
+const POWER_RAIN := "Rain"
 
 var board_state: BoardState
 var current_level_data: LevelData
 var moves_remaining: int = 0
+var selected_power: String = POWER_NONE
 
 func _ready() -> void:
 	finish_button.pressed.connect(_on_finish_button_pressed)
 	restart_button.pressed.connect(_on_restart_button_pressed)
-	test_action_button.pressed.connect(_on_test_action_button_pressed)
+	rain_button.pressed.connect(_on_rain_button_pressed)
+	board_renderer.cell_clicked.connect(_on_board_cell_clicked)
 	_load_level_and_build_board()
 
 func _on_finish_button_pressed() -> void:
@@ -25,10 +30,19 @@ func _on_finish_button_pressed() -> void:
 func _on_restart_button_pressed() -> void:
 	_load_level_and_build_board()
 
-func _on_test_action_button_pressed() -> void:
-	if not _perform_test_action():
-		push_warning("Test action was unavailable, move not consumed.")
+func _on_rain_button_pressed() -> void:
+	selected_power = POWER_RAIN
+	update_hud()
+
+func _on_board_cell_clicked(cell_pos: Vector2i) -> void:
+	if selected_power != POWER_RAIN:
+		push_warning("Select Rain first.")
 		return
+
+	if not apply_rain_to_cell(cell_pos):
+		push_warning("Rain had no effect, move not consumed.")
+		return
+
 	consume_move()
 	board_renderer.refresh()
 
@@ -44,14 +58,17 @@ func _load_level_and_build_board() -> void:
 
 	if level_data == null:
 		current_level_data = null
+		selected_power = POWER_NONE
 		level_name_label.text = "Level: Load Failed"
 		moves_label.text = "Moves: 0"
+		selected_power_label.text = "Selected: None"
 		board_state = BoardState.new(8, 6, TileState.EMPTY)
 		board_renderer.set_board(board_state)
 		return
 
 	current_level_data = level_data
 	moves_remaining = current_level_data.move_limit
+	selected_power = POWER_NONE
 	board_state = _build_board_state(current_level_data)
 	board_renderer.set_board(board_state)
 	update_hud()
@@ -63,19 +80,27 @@ func _build_board_state(level_data: LevelData) -> BoardState:
 			board.set_cell(Vector2i(x, y), int(level_data.tiles[y][x]))
 	return board
 
-func _perform_test_action() -> bool:
+func apply_rain_to_cell(target_pos: Vector2i) -> bool:
 	if moves_remaining <= 0:
 		return false
 
-	# Temporary action: convert the first Fire tile to Water.
-	for y in range(board_state.height):
-		for x in range(board_state.width):
-			var pos := Vector2i(x, y)
-			if board_state.get_cell(pos) == TileState.FIRE:
-				board_state.set_cell(pos, TileState.WATER)
-				return true
+	var changed := false
+	var target_tile := board_state.get_cell(target_pos)
+	if target_tile == TileState.CROP_DRY:
+		board_state.set_cell(target_pos, TileState.CROP_GROWING)
+		changed = true
 
-	return false
+	changed = _extinguish_fire_at(target_pos) or changed
+	for neighbor in board_state.get_neighbors(target_pos):
+		changed = _extinguish_fire_at(neighbor) or changed
+
+	return changed
+
+func _extinguish_fire_at(pos: Vector2i) -> bool:
+	if board_state.get_cell(pos) != TileState.FIRE:
+		return false
+	board_state.set_cell(pos, TileState.EMPTY)
+	return true
 
 func consume_move() -> void:
 	moves_remaining = max(0, moves_remaining - 1)
@@ -88,3 +113,7 @@ func update_hud() -> void:
 		level_name_label.text = "Level: %s" % current_level_data.name
 
 	moves_label.text = "Moves: %d" % moves_remaining
+	if selected_power.is_empty():
+		selected_power_label.text = "Selected: None"
+	else:
+		selected_power_label.text = "Selected: %s" % selected_power

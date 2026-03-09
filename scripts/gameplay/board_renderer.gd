@@ -1,6 +1,8 @@
 class_name BoardRenderer
 extends Node2D
 
+signal cell_clicked(cell_pos: Vector2i)
+
 @export var cell_size: int = 48
 @export var border_color: Color = Color(0.12, 0.12, 0.12, 1.0)
 
@@ -12,6 +14,21 @@ func set_board(new_board_state: BoardState) -> void:
 
 func refresh() -> void:
 	queue_redraw()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if board_state == null:
+		return
+
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		var mouse_event: InputEventMouseButton = event
+		var local_pos := to_local(mouse_event.position)
+		var cell_pos := Vector2i(
+			int(floor(local_pos.x / cell_size)),
+			int(floor(local_pos.y / cell_size))
+		)
+
+		if board_state.in_bounds(cell_pos):
+			cell_clicked.emit(cell_pos)
 
 func _draw() -> void:
 	if board_state == null:

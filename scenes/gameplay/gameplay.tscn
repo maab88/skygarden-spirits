@@ -24,12 +24,19 @@ offset_right = 180.0
 offset_bottom = 91.0
 text = "Moves: 0"
 
-[node name="TestActionButton" type="Button" parent="." unique_id=109234002]
+[node name="SelectedPowerLabel" type="Label" parent="." unique_id=109234004]
+offset_left = 200.0
+offset_top = 68.0
+offset_right = 360.0
+offset_bottom = 91.0
+text = "Selected: None"
+
+[node name="RainButton" type="Button" parent="." unique_id=109234002]
 offset_left = 200.0
 offset_top = 90.0
 offset_right = 350.0
 offset_bottom = 121.0
-text = "Test Action (-1)"
+text = "Select Rain"
 
 [node name="RestartButton" type="Button" parent="." unique_id=109234003]
 offset_left = 360.0
