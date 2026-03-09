@@ -3,6 +3,7 @@ extends Node2D
 @onready var finish_button: Button = $FinishButton
 @onready var restart_button: Button = $RestartButton
 @onready var rain_button: Button = $RainButton
+@onready var sun_button: Button = $SunButton
 @onready var level_name_label: Label = $LevelNameLabel
 @onready var moves_label: Label = $MovesLabel
 @onready var selected_power_label: Label = $SelectedPowerLabel
@@ -11,6 +12,7 @@ extends Node2D
 const DEFAULT_LEVEL_PATH := "res://data/levels/level_001.json"
 const POWER_NONE := ""
 const POWER_RAIN := "Rain"
+const POWER_SUN := "Sun"
 
 var board_state: BoardState
 var current_level_data: LevelData
@@ -21,6 +23,7 @@ func _ready() -> void:
 	finish_button.pressed.connect(_on_finish_button_pressed)
 	restart_button.pressed.connect(_on_restart_button_pressed)
 	rain_button.pressed.connect(_on_rain_button_pressed)
+	sun_button.pressed.connect(_on_sun_button_pressed)
 	board_renderer.cell_clicked.connect(_on_board_cell_clicked)
 	_load_level_and_build_board()
 
@@ -34,13 +37,23 @@ func _on_rain_button_pressed() -> void:
 	selected_power = POWER_RAIN
 	update_hud()
 
+func _on_sun_button_pressed() -> void:
+	selected_power = POWER_SUN
+	update_hud()
+
 func _on_board_cell_clicked(cell_pos: Vector2i) -> void:
-	if selected_power != POWER_RAIN:
-		push_warning("Select Rain first.")
+	if selected_power == POWER_NONE:
+		push_warning("Select a power first.")
 		return
 
-	if not apply_rain_to_cell(cell_pos):
-		push_warning("Rain had no effect, move not consumed.")
+	var changed := false
+	if selected_power == POWER_RAIN:
+		changed = apply_rain_to_cell(cell_pos)
+	elif selected_power == POWER_SUN:
+		changed = apply_sun_to_cell(cell_pos)
+
+	if not changed:
+		push_warning("%s had no effect, move not consumed." % selected_power)
 		return
 
 	consume_move()
@@ -100,6 +113,16 @@ func _extinguish_fire_at(pos: Vector2i) -> bool:
 	if board_state.get_cell(pos) != TileState.FIRE:
 		return false
 	board_state.set_cell(pos, TileState.EMPTY)
+	return true
+
+func apply_sun_to_cell(target_pos: Vector2i) -> bool:
+	if moves_remaining <= 0:
+		return false
+
+	if board_state.get_cell(target_pos) != TileState.CROP_GROWING:
+		return false
+
+	board_state.set_cell(target_pos, TileState.CROP_HARVESTED)
 	return true
 
 func consume_move() -> void:

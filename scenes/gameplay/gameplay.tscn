@@ -34,14 +34,21 @@ text = "Selected: None"
 [node name="RainButton" type="Button" parent="." unique_id=109234002]
 offset_left = 200.0
 offset_top = 90.0
-offset_right = 350.0
+offset_right = 300.0
 offset_bottom = 121.0
 text = "Select Rain"
 
-[node name="RestartButton" type="Button" parent="." unique_id=109234003]
-offset_left = 360.0
+[node name="SunButton" type="Button" parent="." unique_id=109234005]
+offset_left = 310.0
 offset_top = 90.0
-offset_right = 460.0
+offset_right = 410.0
+offset_bottom = 121.0
+text = "Select Sun"
+
+[node name="RestartButton" type="Button" parent="." unique_id=109234003]
+offset_left = 420.0
+offset_top = 90.0
+offset_right = 520.0
 offset_bottom = 121.0
 text = "Restart"
 
