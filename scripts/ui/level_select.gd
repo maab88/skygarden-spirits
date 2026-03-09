@@ -47,12 +47,12 @@ func _refresh_level_buttons() -> void:
 	_set_level_button_state(level_1_button, "level_001", "Level 1")
 	_set_level_button_state(level_2_button, "level_002", "Level 2")
 	_set_level_button_state(level_3_button, "level_003", "Level 3")
-	lock_info_label.text = "Locked levels cannot be played yet."
+	lock_info_label.text = "Unlocked levels are ready to play.\nLocked levels unlock after winning the previous level."
 
 func _set_level_button_state(button: Button, level_id: String, display_name: String) -> void:
 	var unlocked := ProgressionService.is_level_unlocked(level_id)
 	button.disabled = not unlocked
 	if unlocked:
-		button.text = "%s (Unlocked)" % display_name
+		button.text = "%s  |  Unlocked" % display_name
 	else:
-		button.text = "%s (Locked)" % display_name
+		button.text = "%s  |  Locked" % display_name

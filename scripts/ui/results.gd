@@ -12,6 +12,10 @@ func _ready() -> void:
 
 	title_label.text = ResultState.title
 	reason_label.text = ResultState.reason
+	if ResultState.is_win:
+		title_label.modulate = Color(0.25, 0.8, 0.35, 1.0)
+	else:
+		title_label.modulate = Color(0.9, 0.35, 0.35, 1.0)
 	back_to_menu_button.pressed.connect(_on_back_to_menu_button_pressed)
 
 func _on_back_to_menu_button_pressed() -> void:

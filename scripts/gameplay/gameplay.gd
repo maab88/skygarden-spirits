@@ -15,6 +15,7 @@ const ResultState = preload("res://scripts/data/result_state.gd")
 @onready var moves_label: Label = $MovesLabel
 @onready var selected_power_label: Label = $SelectedPowerLabel
 @onready var wind_direction_label: Label = $WindDirectionLabel
+@onready var goals_label: Label = $GoalsLabel
 @onready var board_renderer: BoardRenderer = $BoardRenderer
 
 const DEFAULT_LEVEL_PATH := "res://data/levels/level_001.json"
@@ -124,6 +125,7 @@ func _load_level_and_build_board() -> void:
 		moves_label.text = "Moves: 0"
 		selected_power_label.text = "Selected: None"
 		wind_direction_label.text = "Wind Dir: Right"
+		goals_label.text = "Goals:\n- Could not load level goals."
 		board_state = BoardState.new(8, 6, TileState.EMPTY)
 		board_renderer.set_board(board_state)
 		return
@@ -302,6 +304,7 @@ func update_hud() -> void:
 		selected_power_label.text = "Selected: %s" % selected_power
 
 	wind_direction_label.text = "Wind Dir: %s" % _wind_direction_to_text(selected_wind_direction)
+	goals_label.text = _build_goals_text()
 
 func _wind_direction_to_text(direction: Vector2i) -> String:
 	if direction == Vector2i.UP:
@@ -311,3 +314,15 @@ func _wind_direction_to_text(direction: Vector2i) -> String:
 	if direction == Vector2i.LEFT:
 		return "Left"
 	return "Right"
+
+func _build_goals_text() -> String:
+	if current_level_data == null:
+		return "Goals:\n- No goals loaded."
+
+	if current_level_data.win_conditions.is_empty():
+		return "Goals:\n- No win goals listed."
+
+	var text := "Goals:"
+	for condition in current_level_data.win_conditions:
+		text += "\n- %s" % _win_condition_to_text(condition)
+	return text
