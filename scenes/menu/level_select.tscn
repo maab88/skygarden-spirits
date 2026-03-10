@@ -1,6 +1,40 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/level_select.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/kenney_ui-pack-adventure/PNG/Default/panel_grey_blue.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/kenney_ui-pack-adventure/PNG/Default/panel_border_grey_detail.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/kenney_ui-pack/PNG/Blue/Default/button_rectangle_depth_gloss.png" id="4"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/kenney_ui-pack/PNG/Green/Default/button_rectangle_depth_gloss.png" id="5"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/kenney_ui-pack/PNG/Blue/Default/button_rectangle_depth_flat.png" id="6"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/kenney_ui-pack-adventure/PNG/Default/button_grey.png" id="7"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_level_button_normal"]
+texture = ExtResource("4")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_level_button_hover"]
+texture = ExtResource("5")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_level_button_pressed"]
+texture = ExtResource("6")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_level_button_disabled"]
+texture = ExtResource("7")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
 
 [node name="LevelSelect" type="Control"]
 script = ExtResource("1")
@@ -11,124 +45,249 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Backdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.12, 0.18, 1)
+
+[node name="HeaderPanel" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 24.0
+offset_right = 744.0
+offset_bottom = 124.0
+texture = ExtResource("2")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="HeaderFrame" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 20.0
+offset_right = 748.0
+offset_bottom = 128.0
+texture = ExtResource("3")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+modulate = Color(1, 1, 1, 0.85)
+
+[node name="LevelsPanel" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 136.0
+offset_right = 744.0
+offset_bottom = 420.0
+texture = ExtResource("2")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="LevelsFrame" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 132.0
+offset_right = 748.0
+offset_bottom = 424.0
+texture = ExtResource("3")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+modulate = Color(1, 1, 1, 0.85)
+
 [node name="TitleLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 30.0
-offset_right = 340.0
-offset_bottom = 62.0
-theme_override_font_sizes/font_size = 30
-text = "Level Select"
+offset_left = 80.0
+offset_top = 38.0
+offset_right = 560.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 40
+text = "Choose a Level"
 
 [node name="SubtitleLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 68.0
-offset_right = 640.0
-offset_bottom = 92.0
-text = "Beat levels to unlock the next one."
+offset_left = 80.0
+offset_top = 86.0
+offset_right = 700.0
+offset_bottom = 114.0
+theme_override_font_sizes/font_size = 18
+text = "Win a level to unlock the next challenge."
 
 [node name="Level1Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 108.0
-offset_right = 320.0
-offset_bottom = 144.0
+offset_left = 90.0
+offset_top = 164.0
+offset_right = 390.0
+offset_bottom = 206.0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_level_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_level_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_level_button_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_level_button_disabled")
 text = "Level 1"
 
 [node name="Level2Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 152.0
-offset_right = 320.0
-offset_bottom = 188.0
+offset_left = 90.0
+offset_top = 216.0
+offset_right = 390.0
+offset_bottom = 258.0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_level_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_level_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_level_button_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_level_button_disabled")
 text = "Level 2"
 
 [node name="Level3Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 196.0
-offset_right = 320.0
-offset_bottom = 232.0
+offset_left = 90.0
+offset_top = 268.0
+offset_right = 390.0
+offset_bottom = 310.0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_level_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_level_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_level_button_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_level_button_disabled")
 text = "Level 3"
 
 [node name="Level4Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 240.0
-offset_right = 320.0
-offset_bottom = 276.0
+offset_left = 90.0
+offset_top = 320.0
+offset_right = 390.0
+offset_bottom = 362.0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_level_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_level_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_level_button_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_level_button_disabled")
 text = "Level 4"
 
 [node name="Level5Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 284.0
-offset_right = 320.0
-offset_bottom = 320.0
+offset_left = 90.0
+offset_top = 372.0
+offset_right = 390.0
+offset_bottom = 414.0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_level_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_level_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_level_button_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_level_button_disabled")
 text = "Level 5"
 
 [node name="Level6Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 340.0
-offset_top = 108.0
-offset_right = 620.0
-offset_bottom = 144.0
+offset_left = 410.0
+offset_top = 164.0
+offset_right = 710.0
+offset_bottom = 206.0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_level_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_level_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_level_button_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_level_button_disabled")
 text = "Level 6"
 
 [node name="Level7Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 340.0
-offset_top = 152.0
-offset_right = 620.0
-offset_bottom = 188.0
+offset_left = 410.0
+offset_top = 216.0
+offset_right = 710.0
+offset_bottom = 258.0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_level_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_level_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_level_button_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_level_button_disabled")
 text = "Level 7"
 
 [node name="Level8Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 340.0
-offset_top = 196.0
-offset_right = 620.0
-offset_bottom = 232.0
+offset_left = 410.0
+offset_top = 268.0
+offset_right = 710.0
+offset_bottom = 310.0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_level_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_level_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_level_button_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_level_button_disabled")
 text = "Level 8"
 
 [node name="Level9Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 340.0
-offset_top = 240.0
-offset_right = 620.0
-offset_bottom = 276.0
+offset_left = 410.0
+offset_top = 320.0
+offset_right = 710.0
+offset_bottom = 362.0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_level_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_level_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_level_button_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_level_button_disabled")
 text = "Level 9"
 
 [node name="Level10Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 340.0
-offset_top = 284.0
-offset_right = 620.0
-offset_bottom = 320.0
+offset_left = 410.0
+offset_top = 372.0
+offset_right = 710.0
+offset_bottom = 414.0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_level_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_level_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_level_button_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_level_button_disabled")
 text = "Level 10"
 
 [node name="LockInfoLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 336.0
-offset_right = 700.0
-offset_bottom = 378.0
+offset_left = 80.0
+offset_top = 436.0
+offset_right = 720.0
+offset_bottom = 486.0
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
 text = "Unlocked levels are playable. Locked levels open when you win the previous one."
 
 [node name="BackButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 388.0
-offset_right = 220.0
-offset_bottom = 424.0
+offset_left = 90.0
+offset_top = 502.0
+offset_right = 300.0
+offset_bottom = 548.0
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxTexture_level_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_level_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_level_button_pressed")
 text = "Back"
 
 [node name="ResetProgressButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 240.0
-offset_top = 392.0
-offset_right = 470.0
-offset_bottom = 424.0
-modulate = Color(0.75, 0.75, 0.75, 1)
+offset_left = 520.0
+offset_top = 510.0
+offset_right = 710.0
+offset_bottom = 546.0
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxTexture_level_button_disabled")
+theme_override_styles/hover = SubResource("StyleBoxTexture_level_button_disabled")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_level_button_disabled")
+modulate = Color(0.72, 0.72, 0.72, 0.88)
 text = "Reset Progress (Temp)"
