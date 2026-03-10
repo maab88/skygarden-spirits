@@ -46,7 +46,7 @@ func _ready() -> void:
 	_load_level_and_build_board()
 
 func _on_finish_button_pressed() -> void:
-	ResultState.set_result(true, "Win", "Finished from temporary Finish button.", _current_level_id())
+	ResultState.set_result(false, "Debug End (Temp)", "Used debug finish button. No progression unlocked.", "")
 	get_tree().change_scene_to_file("res://scenes/ui/results.tscn")
 
 func _on_restart_button_pressed() -> void:

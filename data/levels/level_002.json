@@ -1,18 +1,18 @@
 {
   "id": "level_002",
-  "name": "Dry Patch",
-  "width": 8,
-  "height": 6,
-  "move_limit": 14,
-  "available_powers": ["Rain", "Wind"],
-  "win_conditions": ["HarvestAllCrops", "RemoveAllFire"],
+  "name": "First Harvest",
+  "designer_note": "Introduces the crop flow: Rain makes crops grow, then Sun harvests them.",
+  "width": 6,
+  "height": 5,
+  "move_limit": 3,
+  "available_powers": ["Rain", "Sun"],
+  "win_conditions": ["HarvestAllCrops"],
   "lose_conditions": ["OutOfMoves"],
   "tiles": [
-    ["Rock", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Rock"],
-    ["Empty", "CropDry", "CropDry", "Empty", "Fire", "Empty", "CropDry", "Empty"],
-    ["Empty", "Empty", "Water", "Empty", "Empty", "Empty", "Empty", "Empty"],
-    ["Empty", "Empty", "Empty", "Rock", "Empty", "Ice", "Empty", "Empty"],
-    ["Empty", "CropGrowing", "Empty", "Empty", "Empty", "Empty", "CropHarvested", "Empty"],
-    ["Rock", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Rock"]
+    ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty"],
+    ["Empty", "CropDry", "Empty", "CropGrowing", "Empty", "Empty"],
+    ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty"],
+    ["Empty", "Rock", "Empty", "Empty", "Rock", "Empty"],
+    ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
   ]
 }

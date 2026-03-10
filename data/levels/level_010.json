@@ -1,0 +1,19 @@
+{
+  "id": "level_010",
+  "name": "Skygarden Trial",
+  "designer_note": "Final MVP level combining all taught mechanics under a tight but fair move limit.",
+  "width": 8,
+  "height": 6,
+  "move_limit": 17,
+  "available_powers": ["Rain", "Sun", "Frost", "Wind"],
+  "win_conditions": ["HarvestAllCrops", "RemoveAllFire"],
+  "lose_conditions": ["OutOfMoves"],
+  "tiles": [
+    ["CropDry", "Empty", "Fire", "Empty", "CropDry", "Empty", "Fire", "Empty"],
+    ["Empty", "CropGrowing", "Rock", "Empty", "Empty", "CropDry", "Empty", "Empty"],
+    ["Empty", "Water", "Empty", "Fire", "Empty", "Empty", "Water", "Empty"],
+    ["CropDry", "Empty", "Empty", "Empty", "Rock", "Empty", "CropGrowing", "Empty"],
+    ["Empty", "Fire", "Empty", "CropDry", "Empty", "Empty", "Empty", "Empty"],
+    ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+  ]
+}

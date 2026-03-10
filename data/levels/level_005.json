@@ -1,0 +1,18 @@
+{
+  "id": "level_005",
+  "name": "Breezy Push",
+  "designer_note": "Introduces Wind by encouraging players to push fire into open spaces before cleaning up.",
+  "width": 7,
+  "height": 5,
+  "move_limit": 5,
+  "available_powers": ["Wind", "Rain", "Frost"],
+  "win_conditions": ["RemoveAllFire"],
+  "lose_conditions": ["OutOfMoves"],
+  "tiles": [
+    ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"],
+    ["Empty", "Fire", "Rock", "Empty", "Fire", "Empty", "Empty"],
+    ["Empty", "Empty", "Empty", "Empty", "Empty", "Rock", "Empty"],
+    ["Empty", "Water", "Empty", "Empty", "Empty", "Empty", "Empty"],
+    ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+  ]
+}

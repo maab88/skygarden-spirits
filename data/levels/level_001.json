@@ -1,18 +1,18 @@
 {
   "id": "level_001",
-  "name": "First Sprouts",
-  "width": 8,
-  "height": 6,
-  "move_limit": 12,
-  "available_powers": ["Rain", "Sun"],
-  "win_conditions": ["HarvestAllCrops"],
+  "name": "Rain Basics",
+  "designer_note": "Teaches the Rain power by clearing nearby fire with a very forgiving first puzzle.",
+  "width": 6,
+  "height": 5,
+  "move_limit": 2,
+  "available_powers": ["Rain"],
+  "win_conditions": ["RemoveAllFire"],
   "lose_conditions": ["OutOfMoves"],
   "tiles": [
-	["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"],
-	["Empty", "CropDry", "CropGrowing", "CropHarvested", "Empty", "Empty", "Empty", "Empty"],
-	["Empty", "Empty", "Empty", "Empty", "Fire", "Water", "Empty", "Empty"],
-	["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Rock", "Empty"],
-	["Empty", "Empty", "Ice", "Empty", "Empty", "Empty", "Empty", "Empty"],
-	["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+	["Empty", "Empty", "Empty", "Empty", "Empty", "Empty"],
+	["Empty", "Empty", "Fire", "Fire", "Empty", "Empty"],
+	["Empty", "Empty", "Empty", "Empty", "Empty", "Empty"],
+	["Empty", "Rock", "Empty", "Empty", "Rock", "Empty"],
+	["Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
   ]
 }

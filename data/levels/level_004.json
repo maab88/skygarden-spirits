@@ -1,16 +1,16 @@
 {
-  "id": "level_003",
-  "name": "Sunny Garden",
-  "designer_note": "Reinforces Rain and Sun over multiple crops with slightly tighter planning.",
+  "id": "level_004",
+  "name": "Cold Snap",
+  "designer_note": "Introduces Frost by asking the player to remove fire while seeing water-to-ice conversion nearby.",
   "width": 7,
   "height": 5,
-  "move_limit": 6,
-  "available_powers": ["Rain", "Sun"],
-  "win_conditions": ["HarvestAllCrops"],
+  "move_limit": 3,
+  "available_powers": ["Frost", "Rain"],
+  "win_conditions": ["RemoveAllFire"],
   "lose_conditions": ["OutOfMoves"],
   "tiles": [
     ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"],
-    ["Empty", "CropDry", "Empty", "CropDry", "Empty", "CropGrowing", "Empty"],
+    ["Empty", "Water", "Fire", "Empty", "Fire", "Water", "Empty"],
     ["Empty", "Empty", "Empty", "Rock", "Empty", "Empty", "Empty"],
     ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"],
     ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]

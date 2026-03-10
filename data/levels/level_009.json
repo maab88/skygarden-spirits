@@ -1,0 +1,19 @@
+{
+  "id": "level_009",
+  "name": "Storm Prep",
+  "designer_note": "Late-game challenge with more crops and fire, teaching efficient move sequencing.",
+  "width": 8,
+  "height": 6,
+  "move_limit": 14,
+  "available_powers": ["Rain", "Sun", "Frost", "Wind"],
+  "win_conditions": ["HarvestAllCrops", "RemoveAllFire"],
+  "lose_conditions": ["OutOfMoves"],
+  "tiles": [
+    ["Empty", "CropDry", "Empty", "Fire", "Empty", "CropGrowing", "Empty", "Empty"],
+    ["Empty", "Empty", "Rock", "Empty", "CropDry", "Empty", "Fire", "Empty"],
+    ["CropDry", "Empty", "Empty", "Water", "Empty", "Empty", "Empty", "CropGrowing"],
+    ["Empty", "Fire", "Empty", "Empty", "Rock", "Empty", "CropDry", "Empty"],
+    ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"],
+    ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+  ]
+}

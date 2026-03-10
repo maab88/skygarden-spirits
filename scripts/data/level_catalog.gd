@@ -1,7 +1,18 @@
 class_name LevelCatalog
 extends RefCounted
 
-const LEVEL_IDS: Array[String] = ["level_001", "level_002", "level_003"]
+const LEVEL_IDS: Array[String] = [
+	"level_001",
+	"level_002",
+	"level_003",
+	"level_004",
+	"level_005",
+	"level_006",
+	"level_007",
+	"level_008",
+	"level_009",
+	"level_010"
+]
 
 static func get_level_path(level_id: String) -> String:
 	return "res://data/levels/%s.json" % level_id

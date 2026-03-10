@@ -1,0 +1,19 @@
+{
+  "id": "level_008",
+  "name": "Crosswinds",
+  "designer_note": "A tighter mixed puzzle where players juggle crop timing and clustered fire control.",
+  "width": 8,
+  "height": 6,
+  "move_limit": 11,
+  "available_powers": ["Rain", "Sun", "Frost", "Wind"],
+  "win_conditions": ["HarvestAllCrops", "RemoveAllFire"],
+  "lose_conditions": ["OutOfMoves"],
+  "tiles": [
+    ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"],
+    ["Empty", "CropDry", "CropDry", "Empty", "Fire", "Empty", "CropGrowing", "Empty"],
+    ["Empty", "Empty", "Rock", "Water", "Empty", "Rock", "Empty", "Empty"],
+    ["Empty", "CropDry", "Empty", "Empty", "Fire", "Empty", "CropGrowing", "Empty"],
+    ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"],
+    ["Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty"]
+  ]
+}

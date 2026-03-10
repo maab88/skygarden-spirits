@@ -78,7 +78,7 @@ offset_left = 630.0
 offset_top = 130.0
 offset_right = 730.0
 offset_bottom = 166.0
-text = "Finish"
+text = "Debug Finish (Temp)"
 
 [node name="WindUpButton" type="Button" parent="." unique_id=109234009]
 offset_left = 40.0
