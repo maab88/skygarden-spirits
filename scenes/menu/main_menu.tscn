@@ -1,6 +1,34 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/kenney_ui-pack-adventure/PNG/Default/panel_grey_blue.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/kenney_ui-pack-adventure/PNG/Default/panel_border_grey_detail.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/kenney_ui-pack/PNG/Green/Default/button_rectangle_depth_gloss.png" id="4"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/kenney_ui-pack/PNG/Blue/Default/button_rectangle_depth_gloss.png" id="5"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/kenney_ui-pack/PNG/Blue/Default/button_rectangle_depth_flat.png" id="6"]
+[ext_resource type="Texture2D" path="res://assets/art/backgrounds/kenney_background-elements/PNG/cloud3.png" id="7"]
+[ext_resource type="Texture2D" path="res://assets/art/backgrounds/kenney_background-elements/PNG/cloud6.png" id="8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_start_normal"]
+texture = ExtResource("4")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_start_hover"]
+texture = ExtResource("5")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_start_pressed"]
+texture = ExtResource("6")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
 
 [node name="MainMenu" type="Control"]
 script = ExtResource("1")
@@ -11,18 +39,92 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TitleLabel" type="Label" parent="."]
+[node name="Backdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.54, 0.82, 0.96, 1)
+
+[node name="CloudLeft" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 40.0
-offset_top = 40.0
-offset_right = 280.0
-offset_bottom = 63.0
+offset_top = 38.0
+offset_right = 240.0
+offset_bottom = 138.0
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(1, 1, 1, 0.85)
+
+[node name="CloudRight" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 54.0
+offset_right = 760.0
+offset_bottom = 154.0
+texture = ExtResource("8")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(1, 1, 1, 0.85)
+
+[node name="TitlePanel" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 128.0
+offset_right = 682.0
+offset_bottom = 326.0
+texture = ExtResource("2")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="TitleFrame" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 124.0
+offset_right = 686.0
+offset_bottom = 330.0
+texture = ExtResource("3")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+modulate = Color(1, 1, 1, 0.9)
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 168.0
+offset_right = 656.0
+offset_bottom = 230.0
+theme_override_font_sizes/font_size = 56
+horizontal_alignment = 1
 text = "Skygarden Spirits"
+
+[node name="SubtitleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 238.0
+offset_right = 632.0
+offset_bottom = 284.0
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+text = "A cozy weather puzzle adventure"
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 90.0
-offset_right = 180.0
-offset_bottom = 121.0
+offset_left = 270.0
+offset_top = 360.0
+offset_right = 530.0
+offset_bottom = 430.0
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("StyleBoxTexture_start_normal")
+theme_override_styles/hover = SubResource("StyleBoxTexture_start_hover")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_start_pressed")
 text = "Start"
